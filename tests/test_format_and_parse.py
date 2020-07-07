@@ -1141,5 +1141,4 @@ from benn.college_football_players
             {"curdate": {}}, {"interval": [{"sub": [{"dayofweek": {"curdate": {}}}, 1]}, "day"]}
         ]}}}
         self.assertEqual(parsed_sql, expected_json)
-
-        assert format(parsed_sql).lower() == sql.lower()
+        self.verify_formatting(sql, expected_json)
