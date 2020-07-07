@@ -1133,3 +1133,13 @@ from benn.college_football_players
 
         self.assertEqual(expected_sql, format(parse(expected_sql)))
         self.verify_formatting(expected_sql, expected_json)
+
+    def test_198_complex_interval(self):
+        sql = "select CURDATE() - interval DAYOFWEEK(CURDATE()) - 1 DAY"
+        parsed_sql = parse(sql)
+        expected_json = {"select": {"value": {"sub": [
+            {"curdate": {}}, {"interval": [{"sub": [{"dayofweek": {"curdate": {}}}, 1]}, "day"]}
+        ]}}}
+        self.assertEqual(parsed_sql, expected_json)
+
+        assert format(parsed_sql).lower() == sql.lower()

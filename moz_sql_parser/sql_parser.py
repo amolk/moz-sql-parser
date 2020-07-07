@@ -315,7 +315,7 @@ def _or(values):
 
 interval = (
     Keyword("interval", caseless=True).suppress().setDebugActions(*debug) +
-    (realNum | intNum)("count").setDebugActions(*debug) +
+    expr("count") +
     _or([Keyword(d, caseless=True)("duration") for d in durations])
 ).addParseAction(to_interval_call).setDebugActions(*debug)
 
